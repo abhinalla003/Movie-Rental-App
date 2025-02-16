@@ -7,11 +7,13 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { RentedMoviesProvider } from "../contexts/RentedMoviesContext";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
+    <RentedMoviesProvider>
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -31,15 +33,18 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarStyle: { display: 'none' },
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="rented"
         options={{
-          title: 'Explore',
+          title: 'Rented',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarStyle: { display: 'none' },
         }}
       />
     </Tabs>
+    </RentedMoviesProvider>
   );
 }
